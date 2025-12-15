@@ -2,175 +2,272 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل معنا - BKO Smart X-Ray</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-top: 2rem;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تواصل معنا - VXCC | BKO Labs</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+  <style>
+    .container{ width:min(1100px,92%); margin:0 auto; }
+    *{ box-sizing:border-box; }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
+    nav{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .nav-links{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+    .cta-button{ white-space:nowrap; }
 
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius-sm);
-            color: white;
-            font-family: inherit;
-        }
+    .menu-toggle{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid var(--border-subtle);
+      background:var(--bg-card);
+      color:white;
+      cursor:pointer;
+    }
 
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      z-index:9999;
+    }
+    .mobile-menu.open{ display:block; }
+    .mobile-menu-panel{
+      position:absolute;
+      top:16px;
+      right:16px;
+      left:16px;
+      background:var(--bg-card);
+      border:1px solid var(--border-subtle);
+      border-radius:var(--radius-lg);
+      padding:16px;
+    }
+    .mobile-menu a{
+      display:block;
+      padding:12px 10px;
+      border-radius:10px;
+      color:white;
+      text-decoration:none;
+    }
+    .mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
+    .mobile-menu .mobile-cta{
+      margin-top:10px;
+      display:block;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:12px;
+      background:var(--accent-primary);
+      color:white;
+    }
 
-        .contact-info-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-subtle);
-        }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 2rem;
+    }
 
-        .info-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
+    .form-group { margin-bottom: 1.5rem; }
 
-        .info-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(6, 182, 212, 0.1);
-            color: var(--accent-secondary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
 
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-    </style>
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      color: white;
+      font-family: inherit;
+    }
+
+    textarea.form-control { resize: vertical; min-height: 120px; }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      padding: 2rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--accent-secondary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 1rem;
+      font-size: 1.2rem;
+      flex: 0 0 auto;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+      body{ font-size:15px; }
+      .nav-links, .cta-button{ display:none; }
+      .menu-toggle{ display:inline-flex; }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-info-card{ padding: 1.25rem; }
+      .info-row{ align-items:flex-start; }
+      .info-icon{ margin-left: 0.75rem; }
+
+      main{ padding-top: 100px !important; }
+      h1{ font-size: 1.7rem; line-height: 1.25; }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bg-glow"></div>
+  <div class="bg-glow"></div>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
-                <div class="nav-links">
-                    <a href="index.html">الرئيسية</a>
-                    <a href="project.html">عن المشروع</a>
-                    <a href="files.html">الملفات</a>
-                    <a href="updates.html">التحديثات</a>
-                    <a href="contact.html" class="active">تواصل معنا</a>
-                </div>
-                <a href="files.html" class="cta-button">تحميل الملفات</a>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+
+        <div class="nav-links">
+          <a href="index.html">الرئيسية</a>
+          <a href="project.html">عن المشروع</a>
+          <a href="files.html">الملفات</a>
+          <a href="updates.html">التحديثات</a>
+          <a href="contact.html" class="active">تواصل معنا</a>
         </div>
-    </header>
 
-    <main style="padding-top: 120px;">
-        <div class="container">
-            <div class="section-header">
-                <h1>تواصل <span class="text-gradient">معنا</span></h1>
-                <p>للاستفسارات والمتابعة الخاصة بالمشروع، يمكنكم التواصل عبر إنستغرام.</p>
+        <a href="files.html" class="cta-button">تحميل الملفات</a>
+
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-panel">
+      <a href="index.html">الرئيسية</a>
+      <a href="project.html">عن المشروع</a>
+      <a href="files.html">الملفات</a>
+      <a href="updates.html">التحديثات</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a class="mobile-cta" href="files.html">تحميل الملفات</a>
+    </div>
+  </div>
+
+  <main style="padding-top: 120px;">
+    <div class="container">
+      <div class="section-header">
+        <h1>تواصل <span class="text-gradient">معنا</span></h1>
+        <p>للاستفسارات والمتابعة الخاصة بمشروع VXCC، يمكنكم التواصل عبر إنستغرام.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Contact Form (عرض فقط) -->
+        <div>
+          <form onsubmit="event.preventDefault(); alert('تم استلام رسالتك (نموذج عرض فقط)');">
+            <div class="form-group">
+              <label>الاسم الكامل</label>
+              <input type="text" class="form-control" placeholder="أدخل اسمك">
             </div>
-
-            <div class="contact-grid">
-                <!-- Contact Form (بدون بريد إلكتروني) -->
-                <div>
-                    <form onsubmit="event.preventDefault(); alert('تم استلام رسالتك (نموذج عرض فقط)');">
-                        <div class="form-group">
-                            <label>الاسم الكامل</label>
-                            <input type="text" class="form-control" placeholder="أدخل اسمك">
-                        </div>
-                        <div class="form-group">
-                            <label>الرسالة</label>
-                            <textarea class="form-control" placeholder="اكتب رسالتك هنا"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال</button>
-                    </form>
-                </div>
-
-                <!-- Contact Info -->
-                <div class="contact-info-card">
-                    <h3 style="margin-bottom: 2rem;">معلومات التواصل</h3>
-
-                    <div class="info-row">
-                        <div class="info-icon"><ion-icon name="logo-instagram"></ion-icon></div>
-                        <div>
-                            <span style="display: block; font-size: 0.9rem; color: var(--text-muted);">إنستغرام</span>
-                            <a href="https://instagram.com/oo.in" target="_blank"
-                               style="font-weight: 500; color: white; text-decoration: none;">
-                                @oo.in
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="info-row">
-                        <div class="info-icon"><ion-icon name="people-outline"></ion-icon></div>
-                        <div>
-                            <span style="display: block; font-size: 0.9rem; color: var(--text-muted);">إدارة الطلاب</span>
-                            <span style="font-weight: 500;">
-                                بكر زياد محمد<br>
-                                عبدالرحمن ماهر<br>
-                                محمد مصطفى
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="info-row">
-                        <div class="info-icon"><ion-icon name="school-outline"></ion-icon></div>
-                        <div>
-                            <span style="display: block; font-size: 0.9rem; color: var(--text-muted);">الجهة</span>
-                            <span style="font-weight: 500;">مشروع طلابي – الفيزياء الطبية</span>
-                        </div>
-                    </div>
-
-                </div>
+            <div class="form-group">
+              <label>الرسالة</label>
+              <textarea class="form-control" placeholder="اكتب رسالتك هنا"></textarea>
             </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال</button>
+          </form>
         </div>
-    </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-branding">
-                    <h4>BKO Smart Systems</h4>
-                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
-                </div>
+        <!-- Contact Info -->
+        <div class="contact-info-card">
+          <h3 style="margin-bottom: 2rem;">معلومات التواصل</h3>
+
+          <div class="info-row">
+            <div class="info-icon"><ion-icon name="logo-instagram"></ion-icon></div>
+            <div>
+              <span style="display:block; font-size:0.9rem; color:var(--text-muted);">إنستغرام</span>
+              <a href="https://instagram.com/oo.in" target="_blank"
+                 style="font-weight:500; color:white; text-decoration:none;">
+                @oo.in
+              </a>
             </div>
-        </div>
-    </footer>
+          </div>
 
-    <script src="script.js"></script>
+          <div class="info-row">
+            <div class="info-icon"><ion-icon name="people-outline"></ion-icon></div>
+            <div>
+              <span style="display:block; font-size:0.9rem; color:var(--text-muted);">إدارة الطلاب</span>
+              <span style="font-weight:500;">
+                بكر زياد محمد<br>
+                عبدالرحمن ماهر<br>
+                محمد مصطفى
+              </span>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <div class="info-icon"><ion-icon name="school-outline"></ion-icon></div>
+            <div>
+              <span style="display:block; font-size:0.9rem; color:var(--text-muted);">الجهة</span>
+              <span style="font-weight:500;">مشروع طلابي – الفيزياء الطبية</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-branding">
+          <h4>VXCC | BKO Labs</h4>
+          <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu logic
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => menu.classList.add('open'));
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) menu.classList.remove('open');
+      });
+    })();
+  </script>
+
+  <script src="script.js"></script>
 </body>
-
 </html>
