@@ -2,186 +2,246 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سجل التحديثات - VXCC | BKO Labs</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سجل التحديثات - VXCC | BKO Labs</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background: var(--border-subtle);
-            top: 0;
-            bottom: 0;
-            right: 20px;
-            margin-right: -1px;
-        }
+  <style>
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
 
-        .timeline-item {
-            padding: 10px 60px 10px 10px;
-            position: relative;
-            width: 100%;
-        }
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 2px;
+      background: var(--border-subtle);
+      top: 0;
+      bottom: 0;
+      right: 20px;
+      margin-right: -1px;
+    }
 
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            right: 13px;
-            background: var(--bg-main);
-            border: 2px solid var(--accent-primary);
-            top: 24px;
-            border-radius: 50%;
-            z-index: 1;
-        }
+    .timeline-item {
+      padding: 10px 60px 10px 10px;
+      position: relative;
+      width: 100%;
+    }
 
-        .timeline-content {
-            padding: 20px 30px;
-            background: var(--bg-card);
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border-subtle);
-        }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      right: 13px;
+      background: var(--bg-main);
+      border: 2px solid var(--accent-primary);
+      top: 24px;
+      border-radius: 50%;
+      z-index: 1;
+    }
 
-        .version-tag {
-            background: var(--accent-primary);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
+    .timeline-content {
+      padding: 20px 30px;
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
 
-        .date {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+    .version-tag {
+      background: var(--accent-primary);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-left: 10px;
+      display: inline-block;
+    }
 
-        .change-list {
-            margin-top: 1rem;
-            padding-right: 1rem;
-        }
+    .date {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
 
-        .change-list li {
-            margin-bottom: 0.5rem;
-            list-style-type: disc;
-            color: var(--text-secondary);
-        }
-    </style>
+    .change-list {
+      margin-top: 1rem;
+      padding-right: 1rem;
+    }
+
+    .change-list li {
+      margin-bottom: 0.5rem;
+      list-style-type: disc;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Mobile timeline fix */
+    @media (max-width: 700px) {
+      .timeline {
+        padding: 1rem 0;
+      }
+
+      .timeline::after {
+        right: 10px;
+      }
+
+      .timeline-item {
+        padding: 10px 10px;
+      }
+
+      .timeline-item::after {
+        right: 3px;
+      }
+
+      .timeline-content {
+        padding: 16px 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bg-glow"></div>
+  <div class="bg-glow"></div>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
-                <div class="nav-links">
-                    <a href="index.html">الرئيسية</a>
-                    <a href="project.html">عن المشروع</a>
-                    <a href="files.html">الملفات</a>
-                    <a href="updates.html" class="active">التحديثات</a>
-                    <a href="contact.html">تواصل معنا</a>
-                </div>
-                <a href="files.html" class="cta-button">تحميل الملفات</a>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+
+        <div class="nav-links">
+          <a href="index.html">الرئيسية</a>
+          <a href="project.html">عن المشروع</a>
+          <a href="files.html">الملفات</a>
+          <a href="updates.html" class="active">التحديثات</a>
+          <a href="contact.html">تواصل معنا</a>
         </div>
-    </header>
 
-    <main style="padding-top: 120px;">
-        <div class="container">
-            <div class="section-header">
-                <h1>سجل <span class="text-gradient">تطوير VXCC</span></h1>
-                <p>تاريخ تطور نظام محاكاة غرفة الأشعة خطوة بخطوة</p>
-            </div>
+        <a href="files.html" class="cta-button">تحميل الملفات</a>
 
-            <div class="timeline">
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </nav>
+    </div>
+  </header>
 
-                <!-- v1.0 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>الإصدار الأولي <span class="version-tag">v1.0</span></h3>
-                        <span class="date">أغسطس 2025</span>
-                        <p>بداية فكرة المشروع كنظام محاكاة تدريبي.</p>
-                        <ul class="change-list">
-                            <li>تحديد هدف المشروع كمحاكاة لغرفة الأشعة بدون إشعاع.</li>
-                            <li>اختيار Arduino كوحدة تحكم رئيسية.</li>
-                            <li>تصميم Workflow أساسي (Login → إعدادات → Exposure).</li>
-                        </ul>
-                    </div>
-                </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-panel">
+      <a href="index.html">الرئيسية</a>
+      <a href="project.html">عن المشروع</a>
+      <a href="files.html">الملفات</a>
+      <a href="updates.html">التحديثات</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a class="mobile-cta" href="files.html">تحميل الملفات</a>
+    </div>
+  </div>
 
-                <!-- v1.5 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>تحسينات وظيفية <span class="version-tag" style="background: var(--text-muted);">v1.5</span></h3>
-                        <span class="date">أكتوبر 2025</span>
-                        <ul class="change-list">
-                            <li>إضافة RFID لتسجيل دخول فني الأشعة.</li>
-                            <li>دمج Keypad لإدخال قيم kVp و mAs وزمن التعرض.</li>
-                            <li>حل مشاكل القراءة غير المستقرة للـ RFID.</li>
-                        </ul>
-                    </div>
-                </div>
+  <main style="padding-top: 120px;">
+    <div class="container">
+      <div class="section-header">
+        <h1>سجل <span class="text-gradient">تطوير VXCC</span></h1>
+        <p>تاريخ تطور نظام محاكاة غرفة الأشعة خطوة بخطوة</p>
+      </div>
 
-                <!-- v1.8 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>تحسين الأمان <span class="version-tag" style="background: var(--text-muted);">v1.8</span></h3>
-                        <span class="date">نوفمبر 2025</span>
-                        <ul class="change-list">
-                            <li>إضافة Ultrasonic Sensor لفحص وجود أشخاص داخل الغرفة.</li>
-                            <li>تطبيق فلترة قراءات لتقليل الإنذارات الكاذبة.</li>
-                            <li>منع بدء التعرض الافتراضي عند فشل فحص الأمان.</li>
-                        </ul>
-                    </div>
-                </div>
+      <div class="timeline">
 
-                <!-- v2.0 -->
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3>النسخة المستقرة <span class="version-tag">v2.0</span></h3>
-                        <span class="date">ديسمبر 2025</span>
-                        <p>اكتمال النظام بصيغته التعليمية النهائية.</p>
-                        <ul class="change-list">
-                            <li>توحيد جميع الوحدات ضمن Workflow متكامل.</li>
-                            <li>إضافة شاشة تأكيد قبل التعرض الافتراضي.</li>
-                            <li>تقييم النتيجة (Under / Optimal / Overexposed).</li>
-                            <li>تسجيل جميع العمليات عبر Serial Monitor.</li>
-                            <li>تحسين تنظيم الأسلاك وتقليل التشابك.</li>
-                        </ul>
-                    </div>
-                </div>
-
-            </div>
+        <!-- v1.0 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>الإصدار الأولي <span class="version-tag">v1.0</span></h3>
+            <span class="date">أغسطس 2025</span>
+            <p>بداية فكرة المشروع كنظام محاكاة تدريبي.</p>
+            <ul class="change-list">
+              <li>تحديد هدف المشروع كمحاكاة لغرفة الأشعة بدون إشعاع.</li>
+              <li>اختيار Arduino كوحدة تحكم رئيسية.</li>
+              <li>تصميم Workflow أساسي (Login → إعدادات → Exposure).</li>
+            </ul>
+          </div>
         </div>
-    </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-branding">
-                    <h4>VXCC | BKO Labs</h4>
-                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
-                </div>
-            </div>
+        <!-- v1.5 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>تحسينات وظيفية <span class="version-tag" style="background: var(--text-muted);">v1.5</span></h3>
+            <span class="date">أكتوبر 2025</span>
+            <ul class="change-list">
+              <li>إضافة RFID لتسجيل دخول فني الأشعة.</li>
+              <li>دمج Keypad لإدخال قيم kVp و mAs وزمن التعرض.</li>
+              <li>حل مشاكل القراءة غير المستقرة للـ RFID.</li>
+            </ul>
+          </div>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <!-- v1.8 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>تحسين الأمان <span class="version-tag" style="background: var(--text-muted);">v1.8</span></h3>
+            <span class="date">نوفمبر 2025</span>
+            <ul class="change-list">
+              <li>إضافة Ultrasonic Sensor لفحص وجود أشخاص داخل الغرفة.</li>
+              <li>تطبيق فلترة قراءات لتقليل الإنذارات الكاذبة.</li>
+              <li>منع بدء التعرض الافتراضي عند فشل فحص الأمان.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- v2.0 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <h3>النسخة المستقرة <span class="version-tag">v2.0</span></h3>
+            <span class="date">ديسمبر 2025</span>
+            <p>اكتمال النظام بصيغته التعليمية النهائية.</p>
+            <ul class="change-list">
+              <li>توحيد جميع الوحدات ضمن Workflow متكامل.</li>
+              <li>إضافة شاشة تأكيد قبل التعرض الافتراضي.</li>
+              <li>تقييم النتيجة (Under / Optimal / Overexposed).</li>
+              <li>تسجيل جميع العمليات عبر Serial Monitor.</li>
+              <li>تحسين تنظيم الأسلاك وتقليل التشابك.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-branding">
+          <h4>VXCC | BKO Labs</h4>
+          <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu logic (works across pages)
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => menu.classList.add('open'));
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) menu.classList.remove('open');
+      });
+    })();
+  </script>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
