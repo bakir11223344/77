@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا - BKO Smart X-Ray</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            color: white;
+            font-family: inherit;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-info-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+                <div class="nav-links">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="project.html">عن المشروع</a>
+                    <a href="files.html">الملفات</a>
+                    <a href="updates.html">التحديثات</a>
+                    <a href="contact.html" class="active">تواصل معنا</a>
+                </div>
+                <a href="files.html" class="cta-button">تحميل الملفات</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px;">
+        <div class="container">
+            <div class="section-header">
+                <h1>تواصل <span class="text-gradient">معنا</span></h1>
+                <p>للاستفسارات والمتابعة الخاصة بالمشروع، يمكنكم التواصل عبر إنستغرام.</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Form (بدون بريد إلكتروني) -->
+                <div>
+                    <form onsubmit="event.preventDefault(); alert('تم استلام رسالتك (نموذج عرض فقط)');">
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" class="form-control" placeholder="أدخل اسمك">
+                        </div>
+                        <div class="form-group">
+                            <label>الرسالة</label>
+                            <textarea class="form-control" placeholder="اكتب رسالتك هنا"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info-card">
+                    <h3 style="margin-bottom: 2rem;">معلومات التواصل</h3>
+
+                    <div class="info-row">
+                        <div class="info-icon"><ion-icon name="logo-instagram"></ion-icon></div>
+                        <div>
+                            <span style="display: block; font-size: 0.9rem; color: var(--text-muted);">إنستغرام</span>
+                            <a href="https://instagram.com/oo.in" target="_blank"
+                               style="font-weight: 500; color: white; text-decoration: none;">
+                                @oo.in
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon"><ion-icon name="people-outline"></ion-icon></div>
+                        <div>
+                            <span style="display: block; font-size: 0.9rem; color: var(--text-muted);">إدارة الطلاب</span>
+                            <span style="font-weight: 500;">
+                                بكر زياد محمد<br>
+                                عبدالرحمن ماهر<br>
+                                محمد مصطفى
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon"><ion-icon name="school-outline"></ion-icon></div>
+                        <div>
+                            <span style="display: block; font-size: 0.9rem; color: var(--text-muted);">الجهة</span>
+                            <span style="font-weight: 500;">مشروع طلابي – الفيزياء الطبية</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-branding">
+                    <h4>BKO Smart Systems</h4>
+                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

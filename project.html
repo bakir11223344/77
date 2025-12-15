@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عن المشروع - VXCC | BKO Labs</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+                <div class="nav-links">
+                    <a href="index.html">الرئيسية</a>
+                    <a href="project.html" class="active">عن المشروع</a>
+                    <a href="files.html">الملفات</a>
+                    <a href="updates.html">التحديثات</a>
+                    <a href="contact.html">تواصل معنا</a>
+                </div>
+                <a href="files.html" class="cta-button">تحميل الملفات</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 120px;">
+        <div class="container">
+
+            <div class="section-header">
+                <h1>نظرة شاملة على <span class="text-gradient">VXCC</span></h1>
+                <p>
+                    Virtual X-Ray Control Console هو نظام محاكاة تدريبي يهدف إلى تعليم طلاب الفيزياء الطبية
+                    تسلسل العمل داخل غرفة الأشعة السينية بدون استخدام أي إشعاع حقيقي.
+                </p>
+            </div>
+
+            <!-- Video Section -->
+            <div class="video-container"
+                style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 4rem; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;">
+                <div style="text-align: center; color: var(--text-muted);">
+                    <ion-icon name="play-circle-outline"
+                        style="font-size: 4rem; color: var(--accent-primary); width: 100%;"></ion-icon>
+                    <p style="margin-top: 1rem;">فيديو تشغيل فعلي للنظام (سيتم إضافته لاحقًا)</p>
+                </div>
+            </div>
+
+            <!-- Technical Overview -->
+            <div class="grid" style="margin-bottom: 4rem;">
+
+                <div class="card">
+                    <h3>
+                        <ion-icon name="layers-outline"
+                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+                        فكرة المشروع
+                    </h3>
+                    <p style="margin-top: 1rem;">
+                        يحاكي النظام بيئة غرفة الأشعة من حيث تسجيل دخول فني الأشعة، ضبط الإعدادات،
+                        التحقق من أمان الغرفة، بدء التعرض الافتراضي، وتقييم النتيجة التعليمية،
+                        دون وجود أي مصدر إشعاعي فعلي.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <ion-icon name="hardware-chip-outline"
+                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+                        البنية التقنية
+                    </h3>
+                    <p style="margin-top: 1rem;">
+                        يعتمد النظام على متحكم Arduino كوحدة تحكم مركزية،
+                        ويتكامل مع RFID، Keypad، Ultrasonic Sensor، شاشة LCD I2C، وBuzzer
+                        لمحاكاة سلوك نظام الأشعة الحقيقي من ناحية التشغيل والأمان.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <ion-icon name="shield-checkmark-outline"
+                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+                        الأمان الإشعاعي
+                    </h3>
+                    <p style="margin-top: 1rem;">
+                        يركز المشروع على ترسيخ مفهوم الأمان الإشعاعي من خلال
+                        فحص وجود الأشخاص داخل الغرفة قبل التعرض الافتراضي،
+                        مما يعكس إجراءات السلامة المتبعة في غرف الأشعة الحقيقية.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <ion-icon name="keypad-outline"
+                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+                        ضبط الإعدادات
+                    </h3>
+                    <p style="margin-top: 1rem;">
+                        يتم إدخال قيم kVp و mAs وزمن التعرض عبر لوحة مفاتيح (Keypad)،
+                        مع شاشة تأكيد قبل التنفيذ لتعليم تأثير الإعدادات على جودة الصورة.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <ion-icon name="analytics-outline"
+                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+                        التقييم التعليمي
+                    </h3>
+                    <p style="margin-top: 1rem;">
+                        بعد انتهاء التعرض الافتراضي، يعرض النظام نتيجة تدريبية
+                        (Underexposed / Optimal / Overexposed)
+                        لربط القيم الفيزيائية بجودة الصورة الشعاعية.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        <ion-icon name="terminal-outline"
+                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+                        سجل التشغيل
+                    </h3>
+                    <p style="margin-top: 1rem;">
+                        يتم توثيق جميع الخطوات عبر Serial Monitor
+                        (UID، الإعدادات، قراءات الأمان، العد التنازلي، النتيجة)،
+                        مما يوفر أداة تعليمية وتحليلية للطلبة والمشرفين.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Gallery -->
+            <h2 style="margin-bottom: 2rem;">مكونات النظام</h2>
+            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                <div class="card">Arduino + وحدة التحكم</div>
+                <div class="card">RFID + تسجيل الدخول</div>
+                <div class="card">Keypad + إدخال القيم</div>
+                <div class="card">Ultrasonic + فحص الأمان</div>
+                <div class="card">LCD I2C + الواجهة</div>
+                <div class="card">Buzzer + التنبيه</div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-branding">
+                    <h4>VXCC | BKO Labs</h4>
+                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
