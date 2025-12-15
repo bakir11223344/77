@@ -1,152 +1,239 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VXCC - منصة محاكاة غرفة الأشعة | BKO Labs</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Ionicons for scalable vector icons -->
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VXCC - منصة محاكاة غرفة الأشعة | BKO Labs</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- Mobile Fix (works even if style.css not updated yet) -->
+  <style>
+    .container{ width:min(1100px,92%); margin:0 auto; }
+    img,video,iframe{ max-width:100%; height:auto; }
+    *{ box-sizing:border-box; }
+
+    nav{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .nav-links{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+    .cta-button{ white-space:nowrap; }
+
+    .menu-toggle{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid var(--border-subtle);
+      background:var(--bg-card);
+      color:white;
+      cursor:pointer;
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      z-index:9999;
+    }
+    .mobile-menu.open{ display:block; }
+    .mobile-menu-panel{
+      position:absolute;
+      top:16px;
+      right:16px;
+      left:16px;
+      background:var(--bg-card);
+      border:1px solid var(--border-subtle);
+      border-radius:var(--radius-lg);
+      padding:16px;
+    }
+    .mobile-menu a{
+      display:block;
+      padding:12px 10px;
+      border-radius:10px;
+      color:white;
+      text-decoration:none;
+    }
+    .mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
+    .mobile-menu .mobile-cta{
+      margin-top:10px;
+      display:block;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:12px;
+      background:var(--accent-primary);
+      color:white;
+    }
+
+    /* Phone layout */
+    @media (max-width:700px){
+      body{ font-size:15px; }
+      h1{ font-size:1.7rem; line-height:1.25; }
+      h2{ font-size:1.35rem; }
+      h3{ font-size:1.05rem; }
+
+      .nav-links, .cta-button{ display:none; }
+      .menu-toggle{ display:inline-flex; }
+
+      .hero-actions{ display:flex; flex-direction:column; gap:10px; }
+      .hero-actions .btn{ width:100%; justify-content:center; }
+
+      .grid{ display:grid; grid-template-columns:1fr; gap:1.1rem; }
+      .card{ padding:16px; }
+      .footer-content{ flex-direction:column; gap:14px; }
+      .social-links{ justify-content:flex-start; }
+    }
+
+    @media (max-width:900px) and (min-width:701px){
+      .grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.2rem; }
+    }
+  </style>
 </head>
+
 <body>
-    <div class="bg-glow"></div>
+  <div class="bg-glow"></div>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
-                <div class="nav-links">
-                    <a href="index.html" class="active">الرئيسية</a>
-                    <a href="project.html">عن المشروع</a>
-                    <a href="files.html">الملفات</a>
-                    <a href="updates.html">التحديثات</a>
-                    <a href="contact.html">تواصل معنا</a>
-                </div>
-                <a href="files.html" class="cta-button">تحميل الملفات</a>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+
+        <div class="nav-links">
+          <a href="index.html" class="active">الرئيسية</a>
+          <a href="project.html">عن المشروع</a>
+          <a href="files.html">الملفات</a>
+          <a href="updates.html">التحديثات</a>
+          <a href="contact.html">تواصل معنا</a>
         </div>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <span class="hero-tag">محاكاة تدريبية بدون إشعاع حقيقي</span>
-                    <h1>منصة محاكاة غرفة الأشعة<br><span class="text-gradient">Virtual X-Ray Control Console (VXCC)</span></h1>
-                    <p>
-                        جهاز تدريبي لطلاب الفيزياء الطبية يحاكي خطوات العمل داخل غرفة الأشعة من البداية للنهاية
-                        (تسجيل دخول، ضبط kVp/mAs/Time، فحص أمان الغرفة، تعرّض افتراضي، وتقييم النتيجة)
-                        — بدون أي تعرّض إشعاعي.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="project.html" class="btn btn-primary">
-                            استكشف آلية العمل
-                            <ion-icon name="arrow-back-outline" style="margin-right: 8px; rotate: 180deg;"></ion-icon>
-                        </a>
-                        <a href="files.html" class="btn btn-secondary">
-                            الأكواد والملفات
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <a href="files.html" class="cta-button">تحميل الملفات</a>
 
-        <!-- Features Section -->
-        <section class="features">
-            <div class="container">
-                <div class="section-header">
-                    <h2>لماذا VXCC؟</h2>
-                    <p>تجربة تعليمية واقعية تُدرّب الطالب على Workflow غرفة الأشعة مع تركيز واضح على الأمان</p>
-                </div>
-                
-                <div class="grid">
-                    <div class="card">
-                        <div class="card-icon">
-                            <ion-icon name="id-card-outline"></ion-icon>
-                        </div>
-                        <h3>تسجيل دخول عبر RFID</h3>
-                        <p>
-                            محاكاة دور فني الأشعة عبر بطاقة RFID لبدء الجلسة، مع توثيق الأحداث في Serial Monitor
-                            لتسهيل التدريب والتقييم.
-                        </p>
-                    </div>
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </nav>
+    </div>
+  </header>
 
-                    <div class="card">
-                        <div class="card-icon">
-                            <ion-icon name="keypad-outline"></ion-icon>
-                        </div>
-                        <h3>ضبط الإعدادات من Keypad</h3>
-                        <p>
-                            إدخال قيم kVp و mAs وزمن التعرض خطوة بخطوة، مع شاشة تأكيد قبل بدء التعرض لضمان
-                            فهم العلاقة بين الإعدادات وجودة الصورة.
-                        </p>
-                    </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-panel">
+      <a href="index.html">الرئيسية</a>
+      <a href="project.html">عن المشروع</a>
+      <a href="files.html">الملفات</a>
+      <a href="updates.html">التحديثات</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a class="mobile-cta" href="files.html">تحميل الملفات</a>
+    </div>
+  </div>
 
-                    <div class="card">
-                        <div class="card-icon">
-                            <ion-icon name="shield-checkmark-outline"></ion-icon>
-                        </div>
-                        <h3>فحص أمان الغرفة (Ultrasonic)</h3>
-                        <p>
-                            يتحقق النظام من وجود شخص داخل “الغرفة” قبل التعرض الافتراضي، ويمنع التشغيل عند اكتشاف اقتراب
-                            ضمن حد أمان محدد (قابل للتعديل).
-                        </p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">
-                            <ion-icon name="timer-outline"></ion-icon>
-                        </div>
-                        <h3>تعرض افتراضي مع عدّاد</h3>
-                        <p>
-                            يبدأ التعرض الافتراضي بعد اجتياز فحص الأمان، مع عدّ تنازلي على شاشة LCD.
-                            (يمكن تفعيل/إلغاء الصوت حسب سياسة التدريب).
-                        </p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">
-                            <ion-icon name="analytics-outline"></ion-icon>
-                        </div>
-                        <h3>تقييم النتيجة تعليمياً</h3>
-                        <p>
-                            يعرض النظام نتيجة تدريبية: Underexposed / Optimal / Overexposed بناءً على القيم المدخلة،
-                            لتعليم تأثير الإعدادات على جودة الصورة بشكل مبسّط وواضح.
-                        </p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-icon">
-                            <ion-icon name="terminal-outline"></ion-icon>
-                        </div>
-                        <h3>سجل تدريبي عبر Serial Monitor</h3>
-                        <p>
-                            كل خطوة تُطبع كسجل: UID، القيم المدخلة، قراءات الحساس، حالة الأمان، العدّ التنازلي، والنتيجة.
-                            هذا مفيد للتقييم داخل المختبر والشرح بالجامعة.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-branding">
-                    <h4>VXCC | BKO Labs</h4>
-                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
-                </div>
-                <div class="social-links">
-                    <a href="#"><ion-icon name="logo-github"></ion-icon></a>
-                    <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
-                </div>
-            </div>
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-tag">محاكاة تدريبية بدون إشعاع حقيقي</span>
+          <h1>منصة محاكاة غرفة الأشعة<br><span class="text-gradient">Virtual X-Ray Control Console (VXCC)</span></h1>
+          <p>
+            جهاز تدريبي لطلاب الفيزياء الطبية يحاكي خطوات العمل داخل غرفة الأشعة من البداية للنهاية
+            (تسجيل دخول، ضبط kVp/mAs/Time، فحص أمان الغرفة، تعرّض افتراضي، وتقييم النتيجة)
+            — بدون أي تعرّض إشعاعي.
+          </p>
+          <div class="hero-actions">
+            <a href="project.html" class="btn btn-primary">
+              استكشف آلية العمل
+              <ion-icon name="arrow-back-outline" style="margin-right: 8px; rotate: 180deg;"></ion-icon>
+            </a>
+            <a href="files.html" class="btn btn-secondary">
+              الأكواد والملفات
+            </a>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>لماذا VXCC؟</h2>
+          <p>تجربة تعليمية واقعية تُدرّب الطالب على Workflow غرفة الأشعة مع تركيز واضح على الأمان</p>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <div class="card-icon"><ion-icon name="id-card-outline"></ion-icon></div>
+            <h3>تسجيل دخول عبر RFID</h3>
+            <p>محاكاة دور فني الأشعة عبر بطاقة RFID لبدء الجلسة، مع توثيق الأحداث في Serial Monitor لتسهيل التدريب والتقييم.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><ion-icon name="keypad-outline"></ion-icon></div>
+            <h3>ضبط الإعدادات من Keypad</h3>
+            <p>إدخال قيم kVp و mAs وزمن التعرض خطوة بخطوة، مع شاشة تأكيد قبل بدء التعرض لضمان فهم العلاقة بين الإعدادات وجودة الصورة.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><ion-icon name="shield-checkmark-outline"></ion-icon></div>
+            <h3>فحص أمان الغرفة (Ultrasonic)</h3>
+            <p>يتحقق النظام من وجود شخص داخل “الغرفة” قبل التعرض الافتراضي، ويمنع التشغيل عند اكتشاف اقتراب ضمن حد أمان محدد (قابل للتعديل).</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><ion-icon name="timer-outline"></ion-icon></div>
+            <h3>تعرض افتراضي مع عدّاد</h3>
+            <p>يبدأ التعرض الافتراضي بعد اجتياز فحص الأمان، مع عدّ تنازلي على شاشة LCD. (يمكن تفعيل/إلغاء الصوت حسب سياسة التدريب).</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><ion-icon name="analytics-outline"></ion-icon></div>
+            <h3>تقييم النتيجة تعليمياً</h3>
+            <p>يعرض النظام نتيجة تدريبية: Underexposed / Optimal / Overexposed بناءً على القيم المدخلة، لتعليم تأثير الإعدادات على جودة الصورة بشكل مبسّط وواضح.</p>
+          </div>
+
+          <div class="card">
+            <div class="card-icon"><ion-icon name="terminal-outline"></ion-icon></div>
+            <h3>سجل تدريبي عبر Serial Monitor</h3>
+            <p>كل خطوة تُطبع كسجل: UID، القيم المدخلة، قراءات الحساس، حالة الأمان، العدّ التنازلي، والنتيجة. هذا مفيد للتقييم داخل المختبر والشرح بالجامعة.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-branding">
+          <h4>VXCC | BKO Labs</h4>
+          <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+        </div>
+        <div class="social-links">
+          <a href="#"><ion-icon name="logo-github"></ion-icon></a>
+          <a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu logic
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => menu.classList.add('open'));
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) menu.classList.remove('open');
+      });
+    })();
+  </script>
+
+  <script src="script.js"></script>
 </body>
 </html>
