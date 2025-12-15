@@ -2,245 +2,386 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز التحميل - VXCC | BKO Labs</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <style>
-        .category-tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مركز التحميل - VXCC | BKO Labs</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-        .tab-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            color: var(--text-secondary);
-            padding: 8px 16px;
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+  <style>
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    * { box-sizing: border-box; }
 
-        .tab-btn:hover,
-        .tab-btn.active {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .nav-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .cta-button { white-space: nowrap; }
 
-        .download-btn {
-            padding: 6px 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            font-size: 0.8rem;
-            transition: 0.2s;
-        }
+    .menu-toggle{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid var(--border-subtle);
+      background:var(--bg-card);
+      color:white;
+      cursor:pointer;
+    }
 
-        .download-btn:hover {
-            background: var(--accent-secondary);
-            color: black;
-        }
-    </style>
+    /* Mobile menu overlay */
+    .mobile-menu{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      z-index:9999;
+    }
+    .mobile-menu.open{ display:block; }
+    .mobile-menu-panel{
+      position:absolute;
+      top:16px;
+      right:16px;
+      left:16px;
+      background:var(--bg-card);
+      border:1px solid var(--border-subtle);
+      border-radius:var(--radius-lg);
+      padding:16px;
+    }
+    .mobile-menu a{
+      display:block;
+      padding:12px 10px;
+      border-radius:10px;
+      color:white;
+      text-decoration:none;
+    }
+    .mobile-menu a:hover{ background:rgba(255,255,255,0.06); }
+    .mobile-menu .mobile-cta{
+      margin-top:10px;
+      display:block;
+      text-align:center;
+      padding:12px 10px;
+      border-radius:12px;
+      background:var(--accent-primary);
+      color:white;
+    }
+
+    /* Tabs */
+    .category-tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover,
+    .tab-btn.active {
+      background: var(--accent-primary);
+      color: white;
+      border-color: var(--accent-primary);
+    }
+
+    .download-btn {
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    .download-btn:hover {
+      background: var(--accent-secondary);
+      color: black;
+    }
+
+    /* Make file items behave on mobile even if style.css differs */
+    .file-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      margin-bottom: 12px;
+    }
+
+    .file-icon{ width:44px; display:flex; justify-content:center; }
+    .file-info{ flex:1; min-width:0; }
+    .file-name{ display:block; font-weight:600; color:white; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .file-meta{ display:block; font-size:0.85rem; color:var(--text-muted); margin-top:4px; line-height:1.4; }
+
+    /* Upload zone tweak on mobile */
+    .upload-zone{
+      padding: 18px;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+      body { font-size: 15px; }
+      main { padding-top: 100px !important; }
+      .nav-links, .cta-button { display: none; }
+      .menu-toggle { display: inline-flex; }
+
+      .category-tabs{ gap: 10px; }
+      .tab-btn{ padding: 8px 12px; font-size: 0.9rem; }
+
+      /* Stack file item nicely */
+      .file-item{
+        display:grid;
+        grid-template-columns: 44px 1fr;
+        grid-template-areas:
+          "icon info"
+          "btn  btn";
+        gap: 10px;
+        align-items:start;
+      }
+      .file-icon{ grid-area: icon; }
+      .file-info{ grid-area: info; }
+      .download-btn{
+        grid-area: btn;
+        display:block;
+        text-align:center;
+        padding: 10px 12px;
+      }
+      .file-name{ white-space: normal; }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bg-glow"></div>
+  <div class="bg-glow"></div>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
-                <div class="nav-links">
-                    <a href="index.html">الرئيسية</a>
-                    <a href="project.html">عن المشروع</a>
-                    <a href="files.html" class="active">الملفات</a>
-                    <a href="updates.html">التحديثات</a>
-                    <a href="contact.html">تواصل معنا</a>
-                </div>
-                <a href="files.html" class="cta-button">تحميل الملفات</a>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+
+        <div class="nav-links">
+          <a href="index.html">الرئيسية</a>
+          <a href="project.html">عن المشروع</a>
+          <a href="files.html" class="active">الملفات</a>
+          <a href="updates.html">التحديثات</a>
+          <a href="contact.html">تواصل معنا</a>
         </div>
-    </header>
 
-    <main style="padding-top: 120px;">
-        <div class="container">
-            <div class="section-header">
-                <h1>مركز <span class="text-gradient">التحميلات</span></h1>
-                <p>المستودع الكامل لملفات مشروع VXCC: الأكواد، التوثيق، مخططات الربط، وتجارب التشغيل</p>
-            </div>
+        <a href="files.html" class="cta-button">تحميل الملفات</a>
 
-            <!-- Upload Area (Demo Only) -->
-            <div class="upload-zone" id="drop-zone">
-                <ion-icon name="cloud-upload-outline"
-                    style="font-size: 3rem; color: var(--accent-secondary); margin-bottom: 1rem; width: 100%;"></ion-icon>
-                <h3>رفع الملفات (نسخة عرض فقط)</h3>
-                <p style="color: var(--text-muted); margin-top: 0.5rem;">اسحب الملفات وأفلتها هنا أو اضغط للاستعراض</p>
-                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
-                    يدعم: PDF, ZIP, INO, PNG, JPG
-                </p>
-                <input type="file" id="file-input" multiple style="display: none;">
-            </div>
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </nav>
+    </div>
+  </header>
 
-            <div style="margin-top: 4rem;">
-                <div class="category-tabs">
-                    <button class="tab-btn active" data-cat="all">الكل</button>
-                    <button class="tab-btn" data-cat="firmware">Arduino Code</button>
-                    <button class="tab-btn" data-cat="wiring">Wiring</button>
-                    <button class="tab-btn" data-cat="docs">Documentation</button>
-                    <button class="tab-btn" data-cat="media">Media</button>
-                </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-panel">
+      <a href="index.html">الرئيسية</a>
+      <a href="project.html">عن المشروع</a>
+      <a href="files.html">الملفات</a>
+      <a href="updates.html">التحديثات</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a class="mobile-cta" href="files.html">تحميل الملفات</a>
+    </div>
+  </div>
 
-                <div class="file-list" id="file-list">
+  <main style="padding-top: 120px;">
+    <div class="container">
+      <div class="section-header">
+        <h1>مركز <span class="text-gradient">التحميلات</span></h1>
+        <p>المستودع الكامل لملفات مشروع VXCC: الأكواد، التوثيق، مخططات الربط، وتجارب التشغيل</p>
+      </div>
 
-                    <!-- Arduino Code -->
-                    <div class="file-item" data-cat="firmware">
-                        <div class="file-icon">
-                            <ion-icon name="code-slash-outline" style="font-size: 1.5rem;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">VXCC_Arduino_Main.ino</span>
-                            <span class="file-meta">Arduino Code • مشروع كامل • (RFID + Keypad + Ultrasonic + LCD I2C)</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط GitHub/ZIP هنا">تحميل</a>
-                    </div>
+      <!-- Upload Area (Demo Only) -->
+      <div class="upload-zone" id="drop-zone">
+        <ion-icon name="cloud-upload-outline"
+          style="font-size: 3rem; color: var(--accent-secondary); margin-bottom: 1rem; width: 100%;"></ion-icon>
+        <h3>رفع الملفات (نسخة عرض فقط)</h3>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">اسحب الملفات وأفلتها هنا أو اضغط للاستعراض</p>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+          يدعم: PDF, ZIP, INO, PNG, JPG
+        </p>
+        <input type="file" id="file-input" multiple style="display: none;">
+      </div>
 
-                    <div class="file-item" data-cat="firmware">
-                        <div class="file-icon">
-                            <ion-icon name="bug-outline" style="font-size: 1.5rem;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">RFID_Test_UID.ino</span>
-                            <span class="file-meta">Arduino Code • فحص RFID + طباعة UID على Serial Monitor</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط GitHub/ZIP هنا">تحميل</a>
-                    </div>
-
-                    <div class="file-item" data-cat="firmware">
-                        <div class="file-icon">
-                            <ion-icon name="pulse-outline" style="font-size: 1.5rem;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">Ultrasonic_Safety_Test.ino</span>
-                            <span class="file-meta">Arduino Code • فحص HC-SR04 + قراءات ثابتة للمسافة</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط GitHub/ZIP هنا">تحميل</a>
-                    </div>
-
-                    <!-- Wiring -->
-                    <div class="file-item" data-cat="wiring">
-                        <div class="file-icon">
-                            <ion-icon name="git-branch-outline" style="font-size: 1.5rem; color: #a855f7;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">VXCC_Wiring_Map.pdf</span>
-                            <span class="file-meta">Wiring • جدول منافذ Arduino + خريطة توصيل كل قطعة (بدون RTC)</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط GitHub/Drive هنا">تحميل</a>
-                    </div>
-
-                    <div class="file-item" data-cat="wiring">
-                        <div class="file-icon">
-                            <ion-icon name="image-outline" style="font-size: 1.5rem; color: #a855f7;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">Breadboard_Layout.png</span>
-                            <span class="file-meta">Wiring • صورة تخطيط Breadboard لتقليل التشابك</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط الصورة هنا">تحميل</a>
-                    </div>
-
-                    <!-- Documentation -->
-                    <div class="file-item" data-cat="docs">
-                        <div class="file-icon">
-                            <ion-icon name="document-text-outline" style="font-size: 1.5rem;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">VXCC_Project_Report.pdf</span>
-                            <span class="file-meta">Documentation • تعريف المشروع + Workflow + الفائدة التعليمية + السلامة</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط PDF هنا">تحميل</a>
-                    </div>
-
-                    <div class="file-item" data-cat="docs">
-                        <div class="file-icon">
-                            <ion-icon name="list-outline" style="font-size: 1.5rem;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">Bill_of_Materials_BOM.pdf</span>
-                            <span class="file-meta">Documentation • قائمة القطع + التكلفة + بدائل لكل قطعة</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع رابط PDF هنا">تحميل</a>
-                    </div>
-
-                    <!-- Media -->
-                    <div class="file-item" data-cat="media">
-                        <div class="file-icon">
-                            <ion-icon name="videocam-outline" style="font-size: 1.5rem; color: #3b82f6;"></ion-icon>
-                        </div>
-                        <div class="file-info">
-                            <span class="file-name">Demo_Video_Link.txt</span>
-                            <span class="file-meta">Media • رابط فيديو تشغيل كامل: (RFID → إعدادات → أمان → Exposure → Result)</span>
-                        </div>
-                        <a href="#" class="download-btn" title="ضع الرابط هنا">تحميل</a>
-                    </div>
-
-                </div>
-            </div>
+      <div style="margin-top: 4rem;">
+        <div class="category-tabs">
+          <button class="tab-btn active" data-cat="all">الكل</button>
+          <button class="tab-btn" data-cat="firmware">Arduino Code</button>
+          <button class="tab-btn" data-cat="wiring">Wiring</button>
+          <button class="tab-btn" data-cat="docs">Documentation</button>
+          <button class="tab-btn" data-cat="media">Media</button>
         </div>
-    </main>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-branding">
-                    <h4>VXCC | BKO Labs</h4>
-                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
-                </div>
+        <div class="file-list" id="file-list">
+
+          <!-- Arduino Code -->
+          <div class="file-item" data-cat="firmware">
+            <div class="file-icon">
+              <ion-icon name="code-slash-outline" style="font-size: 1.5rem;"></ion-icon>
             </div>
+            <div class="file-info">
+              <span class="file-name">VXCC_Arduino_Main.ino</span>
+              <span class="file-meta">Arduino Code • مشروع كامل • (RFID + Keypad + Ultrasonic + LCD I2C)</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط GitHub/ZIP هنا">تحميل</a>
+          </div>
+
+          <div class="file-item" data-cat="firmware">
+            <div class="file-icon">
+              <ion-icon name="bug-outline" style="font-size: 1.5rem;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">RFID_Test_UID.ino</span>
+              <span class="file-meta">Arduino Code • فحص RFID + طباعة UID على Serial Monitor</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط GitHub/ZIP هنا">تحميل</a>
+          </div>
+
+          <div class="file-item" data-cat="firmware">
+            <div class="file-icon">
+              <ion-icon name="pulse-outline" style="font-size: 1.5rem;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">Ultrasonic_Safety_Test.ino</span>
+              <span class="file-meta">Arduino Code • فحص HC-SR04 + قراءات ثابتة للمسافة</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط GitHub/ZIP هنا">تحميل</a>
+          </div>
+
+          <!-- Wiring -->
+          <div class="file-item" data-cat="wiring">
+            <div class="file-icon">
+              <ion-icon name="git-branch-outline" style="font-size: 1.5rem; color: #a855f7;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">VXCC_Wiring_Map.pdf</span>
+              <span class="file-meta">Wiring • جدول منافذ Arduino + خريطة توصيل كل قطعة (بدون RTC)</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط GitHub/Drive هنا">تحميل</a>
+          </div>
+
+          <div class="file-item" data-cat="wiring">
+            <div class="file-icon">
+              <ion-icon name="image-outline" style="font-size: 1.5rem; color: #a855f7;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">Breadboard_Layout.png</span>
+              <span class="file-meta">Wiring • صورة تخطيط Breadboard لتقليل التشابك</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط الصورة هنا">تحميل</a>
+          </div>
+
+          <!-- Documentation -->
+          <div class="file-item" data-cat="docs">
+            <div class="file-icon">
+              <ion-icon name="document-text-outline" style="font-size: 1.5rem;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">VXCC_Project_Report.pdf</span>
+              <span class="file-meta">Documentation • تعريف المشروع + Workflow + الفائدة التعليمية + السلامة</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط PDF هنا">تحميل</a>
+          </div>
+
+          <div class="file-item" data-cat="docs">
+            <div class="file-icon">
+              <ion-icon name="list-outline" style="font-size: 1.5rem;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">Bill_of_Materials_BOM.pdf</span>
+              <span class="file-meta">Documentation • قائمة القطع + التكلفة + بدائل لكل قطعة</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع رابط PDF هنا">تحميل</a>
+          </div>
+
+          <!-- Media -->
+          <div class="file-item" data-cat="media">
+            <div class="file-icon">
+              <ion-icon name="videocam-outline" style="font-size: 1.5rem; color: #3b82f6;"></ion-icon>
+            </div>
+            <div class="file-info">
+              <span class="file-name">Demo_Video_Link.txt</span>
+              <span class="file-meta">Media • رابط فيديو تشغيل كامل: (RFID → إعدادات → أمان → Exposure → Result)</span>
+            </div>
+            <a href="#" class="download-btn" title="ضع الرابط هنا">تحميل</a>
+          </div>
+
         </div>
-    </footer>
+      </div>
+    </div>
+  </main>
 
-    <script>
-        // Demo: open file picker
-        const dropZone = document.getElementById('drop-zone');
-        const fileInput = document.getElementById('file-input');
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-branding">
+          <h4>VXCC | BKO Labs</h4>
+          <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-        dropZone.addEventListener('click', () => fileInput.click());
+  <script>
+    // Mobile menu logic
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
 
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                alert(`تم تحديد ${e.target.files.length} ملفات. (هذه نسخة عرض فقط - لا يوجد رفع فعلي بدون خادم)`);
+      toggle.addEventListener('click', () => menu.classList.add('open'));
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) menu.classList.remove('open');
+      });
+    })();
 
-            }
+    // Demo: open file picker
+    const dropZone = document.getElementById('drop-zone');
+    const fileInput = document.getElementById('file-input');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files.length > 0) {
+        alert(`تم تحديد ${e.target.files.length} ملفات. (هذه نسخة عرض فقط - لا يوجد رفع فعلي بدون خادم)`);
+      }
+    });
+
+    // Tabs filtering (UI only)
+    const tabs = document.querySelectorAll('.tab-btn');
+    const items = document.querySelectorAll('.file-item');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const cat = tab.getAttribute('data-cat');
+        items.forEach(it => {
+          it.style.display = (cat === 'all' || it.getAttribute('data-cat') === cat) ? '' : 'none';
         });
+      });
+    });
+  </script>
 
-        // Tabs filtering (UI only)
-        const tabs = document.querySelectorAll('.tab-btn');
-        const items = document.querySelectorAll('.file-item');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                const cat = tab.getAttribute('data-cat');
-                items.forEach(it => {
-                    if (cat === 'all' || it.getAttribute('data-cat') === cat) {
-                        it.style.display = '';
-                    } else {
-                        it.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
