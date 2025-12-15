@@ -2,162 +2,277 @@
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عن المشروع - VXCC | BKO Labs</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عن المشروع - VXCC | BKO Labs</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <style>
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    * { box-sizing: border-box; }
+    img, video, iframe { max-width: 100%; height: auto; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .nav-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .cta-button { white-space: nowrap; }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      color: white;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 9999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu-panel {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      left: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+    .mobile-menu a {
+      display: block;
+      padding: 12px 10px;
+      border-radius: 10px;
+      color: white;
+      text-decoration: none;
+    }
+    .mobile-menu a:hover { background: rgba(255, 255, 255, 0.06); }
+    .mobile-menu .mobile-cta {
+      margin-top: 10px;
+      display: block;
+      text-align: center;
+      padding: 12px 10px;
+      border-radius: 12px;
+      background: var(--accent-primary);
+      color: white;
+    }
+
+    /* Grid responsiveness */
+    .grid { display: grid; gap: 1.2rem; }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      body { font-size: 15px; }
+      main { padding-top: 100px !important; }
+      .nav-links, .cta-button { display: none; }
+      .menu-toggle { display: inline-flex; }
+
+      h1 { font-size: 1.7rem; line-height: 1.25; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.05rem; }
+
+      .grid { grid-template-columns: 1fr; gap: 1.1rem; }
+      .card { padding: 16px; }
+
+      /* make video placeholder fit nicely */
+      .video-container { margin-bottom: 2rem !important; }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="bg-glow"></div>
+  <div class="bg-glow"></div>
 
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
-                <div class="nav-links">
-                    <a href="index.html">الرئيسية</a>
-                    <a href="project.html" class="active">عن المشروع</a>
-                    <a href="files.html">الملفات</a>
-                    <a href="updates.html">التحديثات</a>
-                    <a href="contact.html">تواصل معنا</a>
-                </div>
-                <a href="files.html" class="cta-button">تحميل الملفات</a>
-            </nav>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BKO <span class="text-gradient">Labs</span></a>
+
+        <div class="nav-links">
+          <a href="index.html">الرئيسية</a>
+          <a href="project.html" class="active">عن المشروع</a>
+          <a href="files.html">الملفات</a>
+          <a href="updates.html">التحديثات</a>
+          <a href="contact.html">تواصل معنا</a>
         </div>
-    </header>
 
-    <main style="padding-top: 120px;">
-        <div class="container">
+        <a href="files.html" class="cta-button">تحميل الملفات</a>
 
-            <div class="section-header">
-                <h1>نظرة شاملة على <span class="text-gradient">VXCC</span></h1>
-                <p>
-                    Virtual X-Ray Control Console هو نظام محاكاة تدريبي يهدف إلى تعليم طلاب الفيزياء الطبية
-                    تسلسل العمل داخل غرفة الأشعة السينية بدون استخدام أي إشعاع حقيقي.
-                </p>
-            </div>
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menuToggle" aria-label="القائمة">
+          <ion-icon name="menu-outline"></ion-icon>
+        </button>
+      </nav>
+    </div>
+  </header>
 
-            <!-- Video Section -->
-            <div class="video-container"
-                style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 4rem; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;">
-                <div style="text-align: center; color: var(--text-muted);">
-                    <ion-icon name="play-circle-outline"
-                        style="font-size: 4rem; color: var(--accent-primary); width: 100%;"></ion-icon>
-                    <p style="margin-top: 1rem;">فيديو تشغيل فعلي للنظام (سيتم إضافته لاحقًا)</p>
-                </div>
-            </div>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-panel">
+      <a href="index.html">الرئيسية</a>
+      <a href="project.html">عن المشروع</a>
+      <a href="files.html">الملفات</a>
+      <a href="updates.html">التحديثات</a>
+      <a href="contact.html">تواصل معنا</a>
+      <a class="mobile-cta" href="files.html">تحميل الملفات</a>
+    </div>
+  </div>
 
-            <!-- Technical Overview -->
-            <div class="grid" style="margin-bottom: 4rem;">
+  <main style="padding-top: 120px;">
+    <div class="container">
 
-                <div class="card">
-                    <h3>
-                        <ion-icon name="layers-outline"
-                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
-                        فكرة المشروع
-                    </h3>
-                    <p style="margin-top: 1rem;">
-                        يحاكي النظام بيئة غرفة الأشعة من حيث تسجيل دخول فني الأشعة، ضبط الإعدادات،
-                        التحقق من أمان الغرفة، بدء التعرض الافتراضي، وتقييم النتيجة التعليمية،
-                        دون وجود أي مصدر إشعاعي فعلي.
-                    </p>
-                </div>
+      <div class="section-header">
+        <h1>نظرة شاملة على <span class="text-gradient">VXCC</span></h1>
+        <p>
+          Virtual X-Ray Control Console هو نظام محاكاة تدريبي يهدف إلى تعليم طلاب الفيزياء الطبية
+          تسلسل العمل داخل غرفة الأشعة السينية بدون استخدام أي إشعاع حقيقي.
+        </p>
+      </div>
 
-                <div class="card">
-                    <h3>
-                        <ion-icon name="hardware-chip-outline"
-                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
-                        البنية التقنية
-                    </h3>
-                    <p style="margin-top: 1rem;">
-                        يعتمد النظام على متحكم Arduino كوحدة تحكم مركزية،
-                        ويتكامل مع RFID، Keypad، Ultrasonic Sensor، شاشة LCD I2C، وBuzzer
-                        لمحاكاة سلوك نظام الأشعة الحقيقي من ناحية التشغيل والأمان.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        <ion-icon name="shield-checkmark-outline"
-                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
-                        الأمان الإشعاعي
-                    </h3>
-                    <p style="margin-top: 1rem;">
-                        يركز المشروع على ترسيخ مفهوم الأمان الإشعاعي من خلال
-                        فحص وجود الأشخاص داخل الغرفة قبل التعرض الافتراضي،
-                        مما يعكس إجراءات السلامة المتبعة في غرف الأشعة الحقيقية.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        <ion-icon name="keypad-outline"
-                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
-                        ضبط الإعدادات
-                    </h3>
-                    <p style="margin-top: 1rem;">
-                        يتم إدخال قيم kVp و mAs وزمن التعرض عبر لوحة مفاتيح (Keypad)،
-                        مع شاشة تأكيد قبل التنفيذ لتعليم تأثير الإعدادات على جودة الصورة.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        <ion-icon name="analytics-outline"
-                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
-                        التقييم التعليمي
-                    </h3>
-                    <p style="margin-top: 1rem;">
-                        بعد انتهاء التعرض الافتراضي، يعرض النظام نتيجة تدريبية
-                        (Underexposed / Optimal / Overexposed)
-                        لربط القيم الفيزيائية بجودة الصورة الشعاعية.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <h3>
-                        <ion-icon name="terminal-outline"
-                            style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
-                        سجل التشغيل
-                    </h3>
-                    <p style="margin-top: 1rem;">
-                        يتم توثيق جميع الخطوات عبر Serial Monitor
-                        (UID، الإعدادات، قراءات الأمان، العد التنازلي، النتيجة)،
-                        مما يوفر أداة تعليمية وتحليلية للطلبة والمشرفين.
-                    </p>
-                </div>
-
-            </div>
-
-            <!-- Gallery -->
-            <h2 style="margin-bottom: 2rem;">مكونات النظام</h2>
-            <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
-                <div class="card">Arduino + وحدة التحكم</div>
-                <div class="card">RFID + تسجيل الدخول</div>
-                <div class="card">Keypad + إدخال القيم</div>
-                <div class="card">Ultrasonic + فحص الأمان</div>
-                <div class="card">LCD I2C + الواجهة</div>
-                <div class="card">Buzzer + التنبيه</div>
-            </div>
-
+      <!-- Video Section -->
+      <div class="video-container"
+        style="background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-subtle); margin-bottom: 4rem; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center;">
+        <div style="text-align: center; color: var(--text-muted);">
+          <ion-icon name="play-circle-outline"
+            style="font-size: 4rem; color: var(--accent-primary); width: 100%;"></ion-icon>
+          <p style="margin-top: 1rem;">فيديو تشغيل فعلي للنظام (سيتم إضافته لاحقًا)</p>
         </div>
-    </main>
+      </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-branding">
-                    <h4>VXCC | BKO Labs</h4>
-                    <p>Designed by Bakr Zead – BKO Labs © 2025</p>
-                </div>
-            </div>
+      <!-- Technical Overview -->
+      <div class="grid" style="margin-bottom: 4rem;">
+
+        <div class="card">
+          <h3>
+            <ion-icon name="layers-outline"
+              style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+            فكرة المشروع
+          </h3>
+          <p style="margin-top: 1rem;">
+            يحاكي النظام بيئة غرفة الأشعة من حيث تسجيل دخول فني الأشعة، ضبط الإعدادات،
+            التحقق من أمان الغرفة، بدء التعرض الافتراضي، وتقييم النتيجة التعليمية،
+            دون وجود أي مصدر إشعاعي فعلي.
+          </p>
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+        <div class="card">
+          <h3>
+            <ion-icon name="hardware-chip-outline"
+              style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+            البنية التقنية
+          </h3>
+          <p style="margin-top: 1rem;">
+            يعتمد النظام على متحكم Arduino كوحدة تحكم مركزية،
+            ويتكامل مع RFID، Keypad، Ultrasonic Sensor، شاشة LCD I2C، وBuzzer
+            لمحاكاة سلوك نظام الأشعة الحقيقي من ناحية التشغيل والأمان.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <ion-icon name="shield-checkmark-outline"
+              style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+            الأمان الإشعاعي
+          </h3>
+          <p style="margin-top: 1rem;">
+            يركز المشروع على ترسيخ مفهوم الأمان الإشعاعي من خلال
+            فحص وجود الأشخاص داخل الغرفة قبل التعرض الافتراضي،
+            مما يعكس إجراءات السلامة المتبعة في غرف الأشعة الحقيقية.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <ion-icon name="keypad-outline"
+              style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+            ضبط الإعدادات
+          </h3>
+          <p style="margin-top: 1rem;">
+            يتم إدخال قيم kVp و mAs وزمن التعرض عبر لوحة مفاتيح (Keypad)،
+            مع شاشة تأكيد قبل التنفيذ لتعليم تأثير الإعدادات على جودة الصورة.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <ion-icon name="analytics-outline"
+              style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+            التقييم التعليمي
+          </h3>
+          <p style="margin-top: 1rem;">
+            بعد انتهاء التعرض الافتراضي، يعرض النظام نتيجة تدريبية
+            (Underexposed / Optimal / Overexposed)
+            لربط القيم الفيزيائية بجودة الصورة الشعاعية.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>
+            <ion-icon name="terminal-outline"
+              style="color: var(--accent-secondary); vertical-align: middle; margin-left: 8px;"></ion-icon>
+            سجل التشغيل
+          </h3>
+          <p style="margin-top: 1rem;">
+            يتم توثيق جميع الخطوات عبر Serial Monitor
+            (UID، الإعدادات، قراءات الأمان، العد التنازلي، النتيجة)،
+            مما يوفر أداة تعليمية وتحليلية للطلبة والمشرفين.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Gallery -->
+      <h2 style="margin-bottom: 2rem;">مكونات النظام</h2>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="card">Arduino + وحدة التحكم</div>
+        <div class="card">RFID + تسجيل الدخول</div>
+        <div class="card">Keypad + إدخال القيم</div>
+        <div class="card">Ultrasonic + فحص الأمان</div>
+        <div class="card">LCD I2C + الواجهة</div>
+        <div class="card">Buzzer + التنبيه</div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-branding">
+          <h4>VXCC | BKO Labs</h4>
+          <p>Designed by Bakr Zead – BKO Labs © 2025</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu logic
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', () => menu.classList.add('open'));
+      menu.addEventListener('click', (e) => {
+        if (e.target === menu) menu.classList.remove('open');
+      });
+    })();
+  </script>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
